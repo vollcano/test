@@ -7,30 +7,46 @@
 //
 
 #import "ViewController.h"
+typedef enum{
+    kMovingDirUp = 10,
+    kMovingDirBottom,
+    kMovingDirLeft,
+    kMovingDirRight,
+    }kMovingDir;
+#define kMovingDelta 20.0f
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *num1;
-@property (weak, nonatomic) IBOutlet UITextField *num2;
-@property (weak, nonatomic) IBOutlet UILabel *result;
+@property (weak, nonatomic) IBOutlet UIButton *icon;
+
+
+
 
 @end
-
 @implementation ViewController
-- (IBAction)compute:(id)sender {
-    int s1 = self.num1.text.intValue + self.num2.text.intValue;
-    self.result.text = [NSString stringWithFormat:@"%d",s1];
-    [self.view endEditing:YES];
+- (IBAction)move:(UIButton *)sender {
+    CGRect frame = self.icon.frame;
+    switch (sender.tag) {
+        case kMovingDirUp:
+            frame.origin.y -= kMovingDelta;
+            break;
+        case kMovingDirBottom:
+            frame.origin.y += kMovingDelta;
+            break;
+        case kMovingDirLeft:
+            frame.origin.x -= kMovingDelta;
+            break;
+        case kMovingDirRight:
+            frame.origin.x += kMovingDelta;
+            break;
+            
+        default:
+            break;
+    }
+    self.icon.frame = frame;
     
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
