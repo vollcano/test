@@ -46,6 +46,21 @@ typedef enum{
     
 }
 
+- (IBAction)zoom:(UIButton *)sender {
+    CGRect bounds = self.icon.bounds;
+    if (sender.tag ) {
+        bounds.size.width += kMovingDelta;
+        bounds.size.height += kMovingDelta;
+    }else {
+        bounds.size.width -= kMovingDelta;
+        bounds.size.height -= kMovingDelta;
+    }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0];
+    self.icon.bounds = bounds;
+    [UIView commitAnimations];
+    
+}
 
 
 
